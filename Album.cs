@@ -1,14 +1,16 @@
 namespace Treehouse.MediaLibrary
 {
-    class Album
+    class Album : MediaType
     {
-      public readonly string Title;
-      public readonly string Artist;
-      
-      public Album(string title, string artist)
-      {
-        Title = title;
-        Artist = artist;
-      }
+        public string Artist { get; private set; }
+        
+        public string DisplayText => 
+            "Album: " + Title + " by " + Artist + OnLoanDisplayText;
+        
+        public Album(string title, string artist) 
+            : base(title)
+        {
+            Artist = artist;
+        }        
     }
 }
