@@ -1,14 +1,16 @@
 namespace Treehouse.MediaLibrary
 {
-    class Book
+    class Book : MediaType
     {
-      public readonly string Title;
-      public readonly string Author;  
-      
-      public Book(string title, string author)
-      {
-      Title = title;
-      Author = author;
-      }
+        public string Author { get; private set; }
+
+        public string DisplayText => 
+            "Book: " + Title + " by " + Author + OnLoanDisplayText;
+        
+        public Book(string title, string author)
+            : base(title)
+        {
+            Author = author;
+        }
     }
 }
