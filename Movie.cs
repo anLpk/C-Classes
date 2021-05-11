@@ -1,15 +1,16 @@
 namespace Treehouse.MediaLibrary
 {
-    class Movie
+    class Movie : MediaType
     {
-      public readonly string Title;
-      public readonly string Director;  
-      
+        public string Director { get; private set; }
+
+        public string DisplayText => 
+            "Movie: " + Title + " by " + Director + OnLoanDisplayText;
         
-      public Movie(string title, string director)
-      {
-        Title = title;
-        Director = director;
-      }
+        public Movie(string title, string director)
+            : base(title)
+        {
+            Director = director;
+        }
     }
 }
