@@ -6,18 +6,69 @@ namespace Treehouse.MediaLibrary
     {
         static void Main()
         {
-          var movie = new Movie("Mad Max", "George Ogilvie");
-          var book = new Book("Harry Potter and the philosopher's stone", "JK Rowling");
-          var album = new Album("Anil Pak", "Le Wagon");
-          
-          Console.WriteLine("Album: " + album.Title + " by " + album.Artist);
-          
-          album.Title = "Let it be!"
-          Console.WriteLine("Album: " + album.Title + " by " + album.Artist);
-          
-          Console.WriteLine("Book: " + book.Title + " by " + book.Author);
-          
-          Console.WriteLine("Movie: " + movie.Title + " by " + movie.Director);
+            try
+            {
+                var mediaLibrary = new MediaLibrary(new MediaType[]
+                {
+                    new Album("Yellow Submarine", "The Beatles"),
+                    new Album("The Wall", "Pink Floyd"),
+                    new Album("Pet Sounds", "The Beach Boys"),
+                    new Book("Moby-Dick", "Herman Melville"),
+                    new Movie("Lawrence of Arabia", "David Lean")
+                });
+                
+//                Console.WriteLine("# of items: " + mediaLibrary.NumberOfItems);
+//              
+//                mediaLibrary.DisplayItems();
+              
+                  var item = mediaLibrary.FindItem("arabia");
+                  
+                  if (item != null)
+                  {
+                    MediaLibrary.DisplayItem(item);
+                  }
+                  else
+                  {
+                    Console.WriteLine("Item not found!");
+                  }
+                
+//                DetectMediaType(mediaLibrary.GetItemAt(0));
+//                DetectMediaType(mediaLibrary.GetItemAt(1));
+//                DetectMediaType(mediaLibrary.GetItemAt(2));
+//                DetectMediaType(mediaLibrary.GetItemAt(3));
+//                DetectMediaType(mediaLibrary.GetItemAt(4));                             
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Exception: " + ex.Message);
+            }            
+        }
+
+
+        
+        static void DetectMediaType(MediaType item) 
+        {
+            if (item == null)
+            {
+                return;
+            }
+
+            if (item is Album)
+            {
+                Console.WriteLine(item.Title + " is an album!");
+            }
+            else if (item is Book)
+            {
+                Console.WriteLine(item.Title + " is a book!");
+            }
+            else if (item is Movie)
+            {
+                Console.WriteLine(item.Title + " is a movie!");
+            }
+            else
+            {
+                throw new Exception("Unexpected media subtype encountered.");
+            }
         }
     }
 }
